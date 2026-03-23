@@ -1,4 +1,5 @@
 regression_model.pkl
 scaler.pkl
+venv/
 __pycache__/
 *.pyc
