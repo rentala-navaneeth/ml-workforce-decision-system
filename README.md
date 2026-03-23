@@ -2,8 +2,8 @@
 
 ## Overview
 This project is an ML-powered decision automation system that optimizes workforce task allocation by predicting task completion time and selecting the most efficient employee. 
-
 Unlike traditional ML projects that focus only on prediction, this system integrates regression modeling with decision optimization to reduce overall task completion time.
+
 ---
 
 ## Problem Statement
