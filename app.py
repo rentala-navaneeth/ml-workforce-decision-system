@@ -5,8 +5,15 @@ import joblib
 # -----------------------
 # Load model and data
 # -----------------------
-model = joblib.load("regression_model.pkl")
-scaler = joblib.load("scaler.pkl")
+import os
+
+if os.path.exists("regression_model.pkl") and os.path.exists("scaler.pkl"):
+    model = joblib.load("regression_model.pkl")
+    scaler = joblib.load("scaler.pkl")
+else:
+    from train_model import *
+    model = joblib.load("regression_model.pkl")
+    scaler = joblib.load("scaler.pkl")
 
 employees_df = pd.read_csv("employees.csv")
 
