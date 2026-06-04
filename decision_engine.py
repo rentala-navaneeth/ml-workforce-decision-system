@@ -1,18 +1,12 @@
 import pandas as pd
 import joblib
 
-# -----------------------
-# Load model and scaler
-# -----------------------
 model = joblib.load("regression_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
 employees_df = pd.read_csv("employees.csv")
 tasks_df = pd.read_csv("tasks.csv")
 
-# -----------------------
-# Decision logic
-# -----------------------
 results = []
 
 for _, task in tasks_df.iterrows():
@@ -54,9 +48,6 @@ print(results_df.head())
 
 import random
 
-# -----------------------
-# BASELINE (Random Assignment)
-# -----------------------
 baseline_times = []
 
 for _, task in tasks_df.iterrows():
@@ -80,14 +71,8 @@ for _, task in tasks_df.iterrows():
 
     baseline_times.append(predicted_time)
 
-# -----------------------
-# OPTIMIZED (Your System)
-# -----------------------
 optimized_times = results_df["predicted_time"]
 
-# -----------------------
-# COMPARISON
-# -----------------------
 baseline_avg = sum(baseline_times) / len(baseline_times)
 optimized_avg = sum(optimized_times) / len(optimized_times)
 
