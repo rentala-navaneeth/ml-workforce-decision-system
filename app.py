@@ -1,10 +1,6 @@
 import streamlit as st
 import pandas as pd
 import joblib
-
-# -----------------------
-# Load model and data
-# -----------------------
 import os
 
 if os.path.exists("regression_model.pkl") and os.path.exists("scaler.pkl"):
@@ -17,24 +13,15 @@ else:
 
 employees_df = pd.read_csv("employees.csv")
 
-# -----------------------
-# UI Title
-# -----------------------
 st.title("ML-Powered Workforce Decision Automation System")
 
 st.write("Predict task completion time and assign optimal employee")
 
-# -----------------------
-# Inputs
-# -----------------------
 skill = st.selectbox("Required Skill", ["Python", "ML", "Web", "Data", "Cloud"])
 difficulty = st.slider("Task Difficulty", 1, 5, 3)
 deadline = st.number_input("Deadline (hours)", 1, 100, 24)
 priority = st.slider("Priority", 1, 3, 2)
 
-# -----------------------
-# Run Model
-# -----------------------
 if st.button("Optimize Assignment"):
 
     results = []
@@ -63,25 +50,17 @@ if st.button("Optimize Assignment"):
 
     results_df = pd.DataFrame(results)
 
-    # -----------------------
-    # Best employee
-    # -----------------------
     best = results_df.sort_values(by="predicted_time").iloc[0]
 
     st.subheader("Best Assignment")
     st.write(f"Employee {int(best['employee_id'])} → Predicted Time: {best['predicted_time']} hrs")
-    # -----------------------
-    # Top 3
-    # -----------------------
     st.subheader("Top 3 Employees")
 
     top3 = results_df.sort_values(by="predicted_time").head(3)
 
     for i, row in top3.reset_index(drop=True).iterrows():
         st.write(f"Rank {i+1}: Employee {int(row['employee_id'])} (Time: {row['predicted_time']} hrs)")
-    # -----------------------
-    # Baseline comparison
-    # -----------------------
+
     import random
 
     random_emp = employees_df.sample(1).iloc[0]
